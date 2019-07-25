@@ -20,6 +20,9 @@ $(document).ready(function(){
         let currentQuestion;
         let currentAnswer;
         let count = 0;
+        let questionCount = 0;
+        let questionList = [];
+        let questionsUsed = [];
         let countInterval;
         let randomQnum;
         let answerTry;
@@ -33,7 +36,7 @@ $(document).ready(function(){
         $("#question-box").append("<section id='answer-area'></section");
         // questions Q:What genre of music did Throbing Gristle coin the name of? A: industrial. 
         // Q: When Genisis and Lady Jaye began to get cosmetic surgery to become the same person what was the term for what they became? A:The Pandrogyne
-    
+
 
         let question1 = {
             question: "What genre of music did Throbing Gristle coin the name of?",
@@ -64,43 +67,60 @@ $(document).ready(function(){
             sound: "filler",
         };
 
-        let questionList =[question1,question2,question3,question4];
+        questionList = [question1,question2,question3,question4];
+        
+        // // for(let i =0; i < questionList.length; i++ ){
+        //     randomQnum = Math.floor(Math.random() * questionList.length);
 
+        //     if (questionsToUse.indexOf(questionList[randomQnum]) > -1){
+        //         return;
+        //     }
+        //     else{
+        //         questionsToUse.push(questionList[randomQnum]);
+        //         console.log(questionsToUse[i]);
+        //     };        
+        // };
         let initializegame = function(){
             if (!questionBoxShown){
                 $("#question-box").show();
                 questionBoxShown = true;
 
             };
-
-            $("#answer-area").html("");
-
-           
-            randomQnum = Math.floor(Math.random() * questionList.length);
             
-            currentObject = questionList[randomQnum];
+            $("#answer-area").empty();
+            count = 23
+            $("#timer-area").text(count);
+            countInterval = setInterval(countdown, 1000)
 
-            currentQuestion = currentObject.question;
-            $("#question").html(currentQuestion);
+            currentObject = questionList [Math.floor(Math.random() * questionList.length)];
 
-            for(let i =0; i < currentObject.possibleAnswers.length; i++){
-                currentAnswer = currentObject.possibleAnswers[i];
-                console.log(currentAnswer)
-                let newAnswerBTN = $("<h2>");
-                newAnswerBTN.addClass("answers");
-                newAnswerBTN.attr("answer-name", currentAnswer);
-                newAnswerBTN.text(currentAnswer);
+            if(questionsUsed.indexOf(currentObject) > -1){
+                clearInterval(countInterval);
+                $("#answer-area").empty()
+                initializegame();
                 
-                
-                $("#answer-area").append(newAnswerBTN);
             }
+            else{
+                $("#question").html(currentObject.question);
+
+                for( i = 0; i < currentObject.possibleAnswers.length; i++){
+                    currentAnswer = currentObject.possibleAnswers[i];
+                    console.log(currentAnswer)
+                    let newAnswerBTN = $("<h2>");
+                    newAnswerBTN.addClass("answers");
+                    newAnswerBTN.attr("answer-name", currentAnswer);
+                    newAnswerBTN.text(currentAnswer);
+                    
+                    $("#answer-area").append(newAnswerBTN);
+                };
+            };
+
+            
         
             // I will need a randomizer to sort Q/A.
             // and another to randomize Answers. 
             
-            count = 23
-            $("#timer-area").text(count);
-            countInterval = setInterval(countdown, 1000)
+          
         };
 
         let winScreen = function(){
@@ -121,10 +141,31 @@ $(document).ready(function(){
         };
 
         let countdown = function(){
-            if (count < 1){
+            if(questionCount === questionList.length -1){
+                if(wins > losses){
+                    alert("you won the game")
+                    //need to replace with a screen replace.
+                }
+                else if (wins === losses){
+                    alert("You got half right!")
+                    //need to replace with a screen replace.
+                }
+                else{
+                    alert("You lost the game.")
+                    //need to replace with a screen replace.
+                }
+                
+            
+
+            }
+            else if (count < 1){
                 losses++
-                timeoutScreen()
+                questionCount++;
+                questionsUsed.push(currentObject);
                 clearInterval(countInterval);
+                timeoutScreen()
+            
+                
 
 
             }
@@ -139,7 +180,13 @@ $(document).ready(function(){
     
         
         let checkForWin = function(){
-            if (answerTry === currentQuestion.answer.trim()){
+            questionCount++;
+            questionsUsed.push(currentObject);
+            console.log("check")
+            clearInterval(countInterval);
+            answerTry = $(this).attr("answer-name");
+            // if questionCount === questionList.length-1
+            if (answerTry === currentObject.answer){
                 // call on win display.
                 wins++;
                 winScreen();
@@ -150,19 +197,22 @@ $(document).ready(function(){
                 // call on loss display
                 lossScreen();
                 // hides page content and shows loss screen 
-            }
+            };
             
         };
         
-        $(".answers").on("click",function(){
-            alert("check")
-            clearInterval(countInterval);
-            answerTry = $(this).val().trim();
-            checkForWin();
+        
+       $(document).on("click",".answers",checkForWin)
+       
+    //    $(".answers").on("click",function(){
+            
+            
+           
+    //         checkForWin();
 
             
 
-        });
+    //     });
         initializegame();
 
         // let endtimer = function(){

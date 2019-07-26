@@ -1,14 +1,22 @@
 $(document).ready(function(){
         // decliar variables 
     // build page sections.
-    let geniImgs = []
-    let gameStart = false;
+    let count = 0;
+    let geniImgs = ["assets/images/geni-greenhoody.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/geni-leaves.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/3Genesis.jpeg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Genis-baloon.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-throb-shirt.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/againstM-F.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/ladyJandGeniwedding.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/geni-lips.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/gen-greendress-grey-hair.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/Thee-Pandrogyne-pink.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-p-orridge-on-screen.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Thee-Pandrogyne.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/psychic_tv.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/young-punks.png","assets/images/psychickCrossWhiteBord.png","assets/images/gen-jaye.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/message_from_the_temple.png","assets/images/psychickCrossWhiteBord.png",];    let gameStart = false;
     let displayImage =function(){
-        $("#slide-show").html(`<img id="game-img" src="${geniImgs.count}">`);
+        $("#slide-show").html(`<img id="game-img" src="${geniImgs[count]}">`);
     }
     let slideShow = function(){
         count++;
+        setTimeout(displayImage, 2000);
+        $("#slide-show").html(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`)
+        if (count === geniImgs.length){
+            count = 0;
+        }
     };
+    let startSlideshow = function(){
+        setInterval(slideShow,2000);
+    }
 
     $("body").html(" <section id='game-area'></section> ");
     $("#game-area").html("<header id='head'></header>");
@@ -16,11 +24,12 @@ $(document).ready(function(){
     $("#head").append(`<section id="head-imgs"></section>`);
     $("#head-imgs").append(`<section id="slide-show"></section>`);
     $("#slide-show").html(`<img id="game-img" src="assets/images/geni-greenhoody.jpg">`);
-    $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
+    // $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
     $("#game-area").append("<article id='question-box'></article>");
     $("#question-box").html("<button id='start-btn'>Start Game</button>");
 
-
+    startSlideshow()
+    
     // build area for/ and opening start button to be replaced.
 
     // within on click function build new page.
@@ -67,7 +76,7 @@ $(document).ready(function(){
             answer: "Industrial",
             possibleAnswers: ["Darkwave", "Industrial", "Acid House", "Black Metal"],
             info: ["<p>The opening of Prostitution marked the launch of Throbbing Gristle, the band formed when Cosey Fanni Tutti, P-Orridge and fellow COUM member Peter Christopherson met electronics wizard Chris Carter... the churning, terrifying noise they created... attracted an ever-increasing group of intense devotees, much to the band’s apparent horror. </p>","<p> Paraphrase from and interview with Cosey Fanni Tutti. by Alex Patrits </p>"],
-            img: `images/throbbing-gristle-jazz.jpg`,
+            img: `assets/images/throbbing-gristle-jazz.jpg`,
             sound: "filler",
         };
         let question2 = {
@@ -75,7 +84,7 @@ $(document).ready(function(){
             answer: "The Pandrogyne",
             possibleAnswers: ["The Pandrogyne", "The Geninirian", "Aceiamorph", "Transatamo"],
             info: ["<p>The two sought to merge themselves into one being, something P-Orridge has termed the \“pandrogyne.\”</p> "],
-            img: `assets/images/assets/images/twins-entwined.jpg`,
+            img: `assets/images/twins-entwined.jpg`,
             sound: "filler",
         };
         let question3 = {
@@ -188,7 +197,7 @@ $(document).ready(function(){
             }
             $("#pause-box").append(currentObject.info)
             
-            setTimeout(initializegame, 5235); 
+            setTimeout(initializegame, 7235); 
             
         };
 

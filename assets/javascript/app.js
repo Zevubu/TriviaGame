@@ -20,18 +20,30 @@ $(document).ready(function(){
         let currentQuestion;
         let currentAnswer;
         let count = 0;
+        let countLost = false; 
         let questionCount = 0;
         let questionList = [];
         let questionsUsed = [];
         let countInterval;
         let randomQnum;
         let answerTry;
+        let soundtype;
         let wins = 0;
         let losses = 0;
         
         
         $("#question-box").append("<section id='question-area'></section>");
-        $("#question-area").html("<p id='question'></p>");
+        $("#question-area").append("<section id='score-area'></section>");
+        $("#game-area").append("<section id='pause-box'></section>")
+        $("#score-area").append("<p id='Your-score-text'>Your score:</p>");
+        $("#score-area").append("<section id='win-loss'></section>");
+        $("#win-loss").append("<section id='wins-area'></section>")
+        $("#wins-area").append("<p id='wins-text'>Wins:</p>")
+        $("#wins-area").append("<p id='wins'></p>")
+        $("#win-loss").append("<section id='loss-area'></section>")
+        $("#loss-area").append("<p id='loss-text'> Losses:</p>")
+        $("#loss-area").append("<p id='loss'></p>")
+        $("#question-area").append("<p id='question'></p>");
          $("#question-area").append("<p id='timer-area'></p>")
         $("#question-box").append("<section id='answer-area'></section");
         // questions Q:What genre of music did Throbing Gristle coin the name of? A: industrial. 
@@ -42,28 +54,32 @@ $(document).ready(function(){
             question: "What genre of music did Throbing Gristle coin the name of?",
             answer: "Industrial",
             possibleAnswers: ["Darkwave", "Industrial", "Acid House", "Black Metal"],
-            img: "filler",
+            info: ["<p>The opening of Prostitution marked the launch of Throbbing Gristle, the band formed when Tutti, P-Orridge and fellow COUM member Peter Christopherson met electronics wizard Chris Carter. If the musical results were no closer to traditional rock and pop than COUM’s free-for-all experiments, they now had a new potency and focus: the churning, terrifying noise they created gradually attracted an ever-increasing group of intense devotees, much to the band’s apparent horror. \“We wore uniforms because we were playing with ideas all the time, investigating that concept of how uniformity sells a product, that was fascinating to us,\” says Tutti. \“That started out as an interest and then it actually worked: eventually, we played the Lyceum in London and the whole audience was wearing military uniforms. No, no, no, no: we don’t want followers.\”</p>","<p>From and interview with Cosey Fanni Tutti. by Alex Patrits </p>"],
+            img: `assets/images/Genis-baloon.jpg`,
             sound: "filler",
         };
         let question2 = {
             question: "When P-Orridge and Lady Jaye began to get cosmetic surgery to become the same person what was their term for what they became?",
-            answer: "yes",
+            answer: "The Pandrogyne",
             possibleAnswers: ["The Pandrogyne", "The Geninirian", "Aceiamorph", "Transatamo"],
-            img: "filler",
+            info: ["<p>The two sought to merge themselves into one being, something P-Orridge has termed the \“pandrogyne.\”</p> "],
+            img: `assets/images/Thee-Pandrogyne.jpg`,
             sound: "filler",
         };
         let question3 = {
-            question: "Am I asking you something?",
-            answer: "yes",
-            possibleAnswers: ["Yes", "no", "maybe", "not sure"],
-            img: "filler",
+            question: "What artist that contributed to Phychick TV, shares a name with the ceator of this website?",
+            answer: "Z'EV",
+            possibleAnswers: ["Larry Thrasher", "Timothy Leary", "Z'EV", "Pere UBU"],
+            info: ["<p>a percussionist, performer, composer, instrument builder, visual artist, poet and theorist who explored visceral and mystical dimensions of sound — becoming a pioneer of industrial music along the way.</p>", "<p> in memoriam </p>"],
+            img: `assets/images/geniyoungpunk.jpg`,
             sound: "filler",
         };
         let question4 = {
-            question: "Am I asking you something?",
-            answer: "yes",
-            possibleAnswers: ["Yes", "no", "maybe", "not sure"],
-            img: "filler",
+            question: "What number is significant in the philosophy of TOPY?",
+            answer: "23",
+            possibleAnswers: ["42", "55", "23", "666"],
+            info: [" \"The number 23 is a bit ov a situationist prank as nothing freaks out the flat people as this mystic number.\""],
+            img: "assets/images/againstM-F.jpg",
             sound: "filler",
         };
 
@@ -86,8 +102,15 @@ $(document).ready(function(){
                 questionBoxShown = true;
 
             };
+            $("#pause-box").empty()
+            $("#pause-box").hide();
+
+            $("#wins").text(wins);
+            $("#loss").text(losses);
             
             $("#answer-area").empty();
+            
+            
             count = 23
             $("#timer-area").text(count);
             countInterval = setInterval(countdown, 1000)
@@ -123,79 +146,97 @@ $(document).ready(function(){
           
         };
 
-        let winScreen = function(){
-            $("#question-box").hide();
+        let pauseScreen = function(){
+            $("#pause-box").show();
             questionBoxShown = false;
-            initializegame()
-        };
-        let lossScreen = function(){
+            questionCount++;
+            questionsUsed.push(currentObject);
+            clearInterval(countInterval);
             $("#question-box").hide();
-            questionBoxShown = false;
-            initializegame()
-        };
-        let timeoutScreen = function(){
-            $("#question-box").hide();
-            questionBoxShown = false;
-            initializegame()
+            $("#pause-box").append(`<p id="win-loss-text-result"></p>`); 
+            $("#pause-box").append(`<img id="game-img" src="${currentObject.img}">`);
+            
+            soundtype = currentObject.sound.split(".").pop();
+            console.log(soundtype);
+            $("#pause-box").append(`<source src="${currentObject.sound}" type="audio/${soundtype}">`);
+            if (countLost){
+                countLost = false
+                $("#win-loss-text-result").text(`You ran out of time. Thee answer was ${currentObject.answer}`)
+            }
+            else if(answerTry === currentObject.answer){
+                $("#win-loss-text-result").text(`You where right! Thee answer is ${currentObject.answer}`)
 
+            }
+            else{
+                $("#win-loss-text-result").text(`I'm sorry my dear but thee correct answer was ${currentObject.answer}`)
+
+            }
+            $("#pause-box").append(currentObject.info)
+            // 
+            
+            setTimeout(initializegame, 5235);
+
+            
+            
         };
+
+        // let lossScreen = function(){
+        //     setTimeout(initializegame, 2000);
+        //     $("#question-box").hide();
+        //     questionBoxShown = false;
+            
+        // };
+        // let timeoutScreen = function(){
+        //     setTimeout(initializegame, 2000);
+        //     $("#question-box").hide();
+        //     questionBoxShown = false;
+        // };
 
         let countdown = function(){
             if(questionCount === questionList.length -1){
                 if(wins > losses){
-                    alert("you won the game")
+                    clearInterval(countInterval);
+                    console.log("you won the game")
                     //need to replace with a screen replace.
                 }
                 else if (wins === losses){
-                    alert("You got half right!")
+                    clearInterval(countInterval);
+                    console.log("You got half right!")
                     //need to replace with a screen replace.
                 }
                 else{
-                    alert("You lost the game.")
+                    clearInterval(countInterval);
+                    console.log("You lost the game.")
                     //need to replace with a screen replace.
                 }
-                
-            
-
             }
             else if (count < 1){
                 losses++
-                questionCount++;
-                questionsUsed.push(currentObject);
-                clearInterval(countInterval);
-                timeoutScreen()
-            
-                
+                countLost = true;
+                pauseScreen();
 
 
             }
             else{
                 count--;
                 $("#timer-area").text(count);
-
             }
         };
 
-        
-    
-        
         let checkForWin = function(){
-            questionCount++;
-            questionsUsed.push(currentObject);
             console.log("check")
-            clearInterval(countInterval);
             answerTry = $(this).attr("answer-name");
             // if questionCount === questionList.length-1
             if (answerTry === currentObject.answer){
                 // call on win display.
                 wins++;
-                winScreen();
+                pauseScreen();
                 // hides page content and shows win screen 
             }
             else{
                 losses++;
                 // call on loss display
-                lossScreen();
+                pauseScreen();
                 // hides page content and shows loss screen 
             };
             

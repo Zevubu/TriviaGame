@@ -2,9 +2,17 @@ $(document).ready(function(){
         // decliar variables 
     // build page sections.
     let gameStart = false;
+    let slideShow = function(){
+        count++;
+    };
 
     $("body").html(" <section id='game-area'></section> ");
-    $("#game-area").html("<header> Genesis P-Orridge </header>");
+    $("#game-area").html("<header id='head'></header>");
+    $("#head").append(`<p id="geni-name-text"> Genesis P-Orridge </p>`);
+    $("#head").append(`<section id="head-imgs"></section>`);
+    $("#head-imgs").append(`<section id="slide-show"></section>`);
+    $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
+    $("#slide-show").html(`<img id="game-img" src="assets/images/geni-greenhoody.jpg">`);
     $("#game-area").append("<article id='question-box'></article>");
     $("#question-box").html("<button id='start-btn'>Start Game</button>");
 
@@ -54,8 +62,8 @@ $(document).ready(function(){
             question: "What genre of music did Throbing Gristle coin the name of?",
             answer: "Industrial",
             possibleAnswers: ["Darkwave", "Industrial", "Acid House", "Black Metal"],
-            info: ["<p>The opening of Prostitution marked the launch of Throbbing Gristle, the band formed when Tutti, P-Orridge and fellow COUM member Peter Christopherson met electronics wizard Chris Carter. If the musical results were no closer to traditional rock and pop than COUM’s free-for-all experiments, they now had a new potency and focus: the churning, terrifying noise they created gradually attracted an ever-increasing group of intense devotees, much to the band’s apparent horror. \“We wore uniforms because we were playing with ideas all the time, investigating that concept of how uniformity sells a product, that was fascinating to us,\” says Tutti. \“That started out as an interest and then it actually worked: eventually, we played the Lyceum in London and the whole audience was wearing military uniforms. No, no, no, no: we don’t want followers.\”</p>","<p>From and interview with Cosey Fanni Tutti. by Alex Patrits </p>"],
-            img: `assets/images/Genis-baloon.jpg`,
+            info: ["<p>The opening of Prostitution marked the launch of Throbbing Gristle, the band formed when Cosey Fanni Tutti, P-Orridge and fellow COUM member Peter Christopherson met electronics wizard Chris Carter... the churning, terrifying noise they created... attracted an ever-increasing group of intense devotees, much to the band’s apparent horror. </p>","<p> Paraphrase from and interview with Cosey Fanni Tutti. by Alex Patrits </p>"],
+            img: `images/throbbing-gristle-jazz.jpg`,
             sound: "filler",
         };
         let question2 = {
@@ -63,7 +71,7 @@ $(document).ready(function(){
             answer: "The Pandrogyne",
             possibleAnswers: ["The Pandrogyne", "The Geninirian", "Aceiamorph", "Transatamo"],
             info: ["<p>The two sought to merge themselves into one being, something P-Orridge has termed the \“pandrogyne.\”</p> "],
-            img: `assets/images/Thee-Pandrogyne.jpg`,
+            img: `assets/images/assets/images/twins-entwined.jpg`,
             sound: "filler",
         };
         let question3 = {
@@ -71,7 +79,7 @@ $(document).ready(function(){
             answer: "Z'EV",
             possibleAnswers: ["Larry Thrasher", "Timothy Leary", "Z'EV", "Pere UBU"],
             info: ["<p>a percussionist, performer, composer, instrument builder, visual artist, poet and theorist who explored visceral and mystical dimensions of sound — becoming a pioneer of industrial music along the way.</p>", "<p> in memoriam </p>"],
-            img: `assets/images/geniyoungpunk.jpg`,
+            img: `assets/images/ZevLive2.jpg`,
             sound: "filler",
         };
         let question4 = {
@@ -79,9 +87,10 @@ $(document).ready(function(){
             answer: "23",
             possibleAnswers: ["42", "55", "23", "666"],
             info: [" \"The number 23 is a bit ov a situationist prank as nothing freaks out the flat people as this mystic number.\""],
-            img: "assets/images/againstM-F.jpg",
+            img: "assets/images/23Skull.jpg",
             sound: "filler",
         };
+
 
         questionList = [question1,question2,question3,question4];
         
@@ -100,7 +109,6 @@ $(document).ready(function(){
             if (!questionBoxShown){
                 $("#question-box").show();
                 questionBoxShown = true;
-
             };
             $("#pause-box").empty()
             $("#pause-box").hide();
@@ -117,7 +125,10 @@ $(document).ready(function(){
 
             currentObject = questionList [Math.floor(Math.random() * questionList.length)];
 
-            if(questionsUsed.indexOf(currentObject) > -1){
+            if(questionCount === questionList.length){
+                finalScreen();
+            }
+            else if(questionsUsed.indexOf(currentObject) > -1){
                 clearInterval(countInterval);
                 $("#answer-area").empty()
                 initializegame();
@@ -172,45 +183,46 @@ $(document).ready(function(){
 
             }
             $("#pause-box").append(currentObject.info)
-            // 
             
-            setTimeout(initializegame, 5235);
-
-            
+            setTimeout(initializegame, 5235); 
             
         };
 
-        // let lossScreen = function(){
-        //     setTimeout(initializegame, 2000);
-        //     $("#question-box").hide();
-        //     questionBoxShown = false;
-            
-        // };
-        // let timeoutScreen = function(){
-        //     setTimeout(initializegame, 2000);
-        //     $("#question-box").hide();
-        //     questionBoxShown = false;
-        // };
+       
 
-        let countdown = function(){
-            if(questionCount === questionList.length -1){
-                if(wins > losses){
-                    clearInterval(countInterval);
-                    console.log("you won the game")
-                    //need to replace with a screen replace.
-                }
-                else if (wins === losses){
-                    clearInterval(countInterval);
-                    console.log("You got half right!")
-                    //need to replace with a screen replace.
-                }
-                else{
-                    clearInterval(countInterval);
-                    console.log("You lost the game.")
-                    //need to replace with a screen replace.
-                }
+        let finalScreen = function(){
+            $("#question-box").hide();
+            $("#pause-box").show()
+            clearInterval(countInterval);
+            $("#pause-box").append(`<p id="win-loss-text-result"></p>`); 
+            $("#pause-box").append(`<img id="game-img" src="${currentObject.img}">`)
+
+
+            if(wins === questionList.length){
+                $("#win-loss-text-result").text(`You really know your stuff. You got all of them right!`)
             }
-            else if (count < 1){
+            else if(wins > losses){
+                $("#win-loss-text-result").text(`You got more then half right, good job!`);
+                
+                //need to replace with a screen replace.
+            }
+            else if (wins === losses){
+                $("#win-loss-text-result").text(`You got half right!`)
+                console.log("You got half right!")
+                //need to replace with a screen replace.
+            }
+            else{
+                clearInterval(countInterval);
+                $("#win-loss-text-result").text(`You lost the game`)
+                console.log("You lost the game.")
+                //need to replace with a screen replace.
+            };
+        };
+        
+        
+        
+        let countdown = function(){
+            if (count < 1){
                 losses++
                 countLost = true;
                 pauseScreen();
@@ -245,6 +257,7 @@ $(document).ready(function(){
         
        $(document).on("click",".answers",checkForWin)
        
+       initializegame();
     //    $(".answers").on("click",function(){
             
             
@@ -254,8 +267,18 @@ $(document).ready(function(){
             
 
     //     });
-        initializegame();
-
+        
+ // let lossScreen = function(){
+        //     setTimeout(initializegame, 2000);
+        //     $("#question-box").hide();
+        //     questionBoxShown = false;
+            
+        // };
+        // let timeoutScreen = function(){
+        //     setTimeout(initializegame, 2000);
+        //     $("#question-box").hide();
+        //     questionBoxShown = false;
+        // };
         // let endtimer = function(){
         //     alert("timer end")
         // }

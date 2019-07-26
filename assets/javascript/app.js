@@ -1,7 +1,11 @@
 $(document).ready(function(){
         // decliar variables 
     // build page sections.
+    let geniImgs = []
     let gameStart = false;
+    let displayImage =function(){
+        $("#slide-show").html(`<img id="game-img" src="${geniImgs.count}">`);
+    }
     let slideShow = function(){
         count++;
     };
@@ -11,8 +15,8 @@ $(document).ready(function(){
     $("#head").append(`<p id="geni-name-text"> Genesis P-Orridge </p>`);
     $("#head").append(`<section id="head-imgs"></section>`);
     $("#head-imgs").append(`<section id="slide-show"></section>`);
-    $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
     $("#slide-show").html(`<img id="game-img" src="assets/images/geni-greenhoody.jpg">`);
+    $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
     $("#game-area").append("<article id='question-box'></article>");
     $("#question-box").html("<button id='start-btn'>Start Game</button>");
 

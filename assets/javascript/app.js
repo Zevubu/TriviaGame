@@ -1,10 +1,12 @@
+
 $(document).ready(function(){
         // decliar variables 
     // build page sections.
     let slideCount = 0;
-    let musicCount = 0;
-    let musicList =["assets/sounds/Psychic TV - The Orchids [1983].mp3", "assets/sounds/Hamburger Lady (D.o.A. The Third and Final Report of Throbbing Gristle, 1978).mp3","assets/sounds/Throbbing Gristle - Almost A Kiss.mp3","assets/sounds/Psychic TV - Godstar.mp3"]
-    let geniImgs = ["assets/images/geni-greenhoody.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/geni-leaves.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/3Genesis.jpeg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Genis-baloon.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-throb-shirt.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/againstM-F.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/ladyJandGeniwedding.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/geni-lips.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/gen-greendress-grey-hair.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/Thee-Pandrogyne-pink.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-p-orridge-on-screen.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Thee-Pandrogyne.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/psychic_tv.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/young-punks.png","assets/images/psychickCrossWhiteBord.png","assets/images/gen-jaye.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/message_from_the_temple.png","assets/images/psychickCrossWhiteBord.png",];    let gameStart = false;
+    let geniImgs = ["assets/images/geni-greenhoody.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/geni-leaves.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/3Genesis.jpeg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Genis-baloon.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-throb-shirt.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/againstM-F.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/ladyJandGeniwedding.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/geni-lips.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/gen-greendress-grey-hair.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/Thee-Pandrogyne-pink.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-p-orridge-on-screen.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Thee-Pandrogyne.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/psychic_tv.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/young-punks.png","assets/images/psychickCrossWhiteBord.png","assets/images/gen-jaye.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/message_from_the_temple.png","assets/images/psychickCrossWhiteBord.png",];    
+    let gameStart = false;
+    let otherMusicElement = document.getElementById("music");
+    otherMusicElement.play();
     let displayImage =function(){
         $("#slide-show").html(`<img id="game-img" src="${geniImgs[slideCount]}">`);
     }
@@ -19,8 +21,8 @@ $(document).ready(function(){
     let startSlideshow = function(){
         setInterval(slideShow,2000);
     }
-
-    $("body").prepend(" <section id='game-area'></section> ");
+    $("body").prepend(" <section id='game-flex'></section> ");
+    $("#game-flex").prepend(" <section id='game-area'></section> ");
     $("#game-area").prepend("<header id='head'></header>");
     $("#head").append(`<p id="geni-name-text"> Genesis P-Orridge </p>`);
     $("#head").append(`<section id="head-imgs"></section>`);
@@ -28,7 +30,7 @@ $(document).ready(function(){
     $("#slide-show").html(`<img id="game-img" src="assets/images/geni-greenhoody.jpg">`);
     // $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
     $("#game-area").append("<article id='question-box'></article>");
-    $("#question-box").html("<button id='start-btn'>Start Game</button>");
+    $("#question-box").html("<h2 id='start-btn'>Start Game</h2>");
     $("#game-area").append(`<footer id="foot"></footer>`);
     
 
@@ -45,9 +47,9 @@ $(document).ready(function(){
     // build question screan area
     $("#start-btn").on("click",function(){
         $("#start-btn").hide();
+        otherMusicElement.play();
         gameStart = true;
         let questionBoxShown = true;
-        let currentQuestion;
         let currentAnswer;
         let count = 0;
         let countLost = false; 
@@ -55,7 +57,6 @@ $(document).ready(function(){
         let questionList = [];
         let questionsUsed = [];
         let countInterval;
-        let randomQnum;
         let answerTry;
         let soundtype;
         let wins = 0;
@@ -124,17 +125,7 @@ $(document).ready(function(){
 
         questionList = [question1,question2,question3,question4,question5];
         
-        // // for(let i =0; i < questionList.length; i++ ){
-        //     randomQnum = Math.floor(Math.random() * questionList.length);
-
-        //     if (questionsToUse.indexOf(questionList[randomQnum]) > -1){
-        //         return;
-        //     }
-        //     else{
-        //         questionsToUse.push(questionList[randomQnum]);
-        //         console.log(questionsToUse[i]);
-        //     };        
-        // };
+      
         let initializegame = function(){
             if (!questionBoxShown){
                 $("#question-box").show();

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Genisis P Trivia Game</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/resets.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
@@ -16,21 +17,21 @@
     score 
     when answer given it shows for a feww seconds a screen weather you got it right or not. then switches to next question with out any user input.   -->
     <footer id="foot-flex">
-        <p>hello</p>
         <section id="audio-flex">
-            <audio autoplay id="music" >
+            <audio id="music" >
                     <source src="assets/sounds/Psychic TV - The Orchids [1983].mp3" type="audio/mpeg">
             </audio>
-            <p>Hear what they have to say, or to get them to shut the hell up!</p>
+            <p>Audio Controls:</p>
             <section id="audio-btn-flex">
-                <button id="play" onclick="playAudio()" type="button">Play</button>
-                <button id="pause" onclick="pauseAudio()" type="button">Pause</button> 
-                <button id="next" onclick="nextTrack()" type="button">Next track</button>
+                <h2 id="play" onclick="playAudio()" type="button">Play</h2>
+                <h2 id="pause" onclick="pauseAudio()" type="button">Pause</h2>
+                <h2 id="next" onclick="nextTrack()" type="button">Skip</h2>
             </section>
             <script>
 
   
                     let musicElement = document.getElementById("music");
+
                     let musicCount = 1;
                     let musicList =["assets/sounds/Psychic TV - The Orchids [1983].mp3", "assets/sounds/Hamburger Lady (D.o.A. The Third and Final Report of Throbbing Gristle, 1978).mp3","assets/sounds/Throbbing Gristle - Almost A Kiss.mp3","assets/sounds/Psychic TV - Godstar.mp3"] 
                     function playAudio() { 
@@ -66,8 +67,7 @@
             </script>
         </section>
         <section id="about-flex">
-            <p>This website was made by Zev Ubu Hoffman.</p> 
-            <p>It is a fanpage!</p>
+            <p>A fan page by Zev Ubu Hoffman.</p> 
         </section>   
     </footer>  
 </body>

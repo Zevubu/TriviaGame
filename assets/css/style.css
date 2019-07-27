@@ -1,12 +1,13 @@
-html { 
-    background: url(https://i.ytimg.com/vi/xhfvZo6Uoto/maxresdefault.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+body{
+    background-image:  url(https://i.ytimg.com/vi/xhfvZo6Uoto/maxresdefault.jpg);
+    background-repeat:  no-repeat;
     background-size: cover;
+    background-position: center 0;
+    bac
+    color: rgb(223, 223, 223);
+    /* Why is my background so freaking big? needs fixing */
+     
 }
-
-  
 #game-flex{
     display: flex;
     flex-direction: row;

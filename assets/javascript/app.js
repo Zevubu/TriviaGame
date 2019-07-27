@@ -30,7 +30,8 @@ $(document).ready(function(){
     $("#slide-show").html(`<img id="game-img" src="assets/images/geni-greenhoody.jpg">`);
     // $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
     $("#game-area").append("<article id='question-box'></article>");
-    $("#question-box").html("<h2 id='start-btn'>Start Game</h2>");
+    $("#head").append(`<section id="head-btn"></section>`);
+    $("#head-btn").append("<h2 id='start-btn'>Start Game</h2>");
     $("#game-area").append(`<footer id="foot"></footer>`);
     
 
@@ -64,9 +65,11 @@ $(document).ready(function(){
         
         
         $("#question-box").append("<section id='question-area'></section>");
+        $("#question-area").append("<section id='timer-box'></section>");
+        $("#timer-box").append("<p id='timer-area'></p>")
         $("#question-area").append("<section id='score-area'></section>");
         $("#game-area").append("<section id='pause-box'></section>")
-        $("#score-area").append("<p id='Your-score-text'>Your score:</p>");
+        // $("#score-area").append("<p id='Your-score-text'>Your score:</p>");
         $("#score-area").append("<section id='win-loss'></section>");
         $("#win-loss").append("<section id='wins-area'></section>")
         $("#wins-area").append("<p id='wins-text'>Wins:</p>")
@@ -74,9 +77,9 @@ $(document).ready(function(){
         $("#win-loss").append("<section id='loss-area'></section>")
         $("#loss-area").append("<p id='loss-text'> Losses:</p>")
         $("#loss-area").append("<p id='loss'></p>")
-        $("#question-area").append("<p id='question'></p>");
-         $("#question-area").append("<p id='timer-area'></p>")
-        $("#question-box").append("<section id='answer-area'></section");
+        $("#question-area").append("<p id='question'></p>"); 
+        $("#question-box").append("<section id='answer-box'></section>");
+        $("#answer-box").append("<section id='answer-area'></section");
         // questions Q:What genre of music did Throbing Gristle coin the name of? A: industrial. 
         // Q: When Genisis and Lady Jaye began to get cosmetic surgery to become the same person what was the term for what they became? A:The Pandrogyne
 
@@ -129,6 +132,7 @@ $(document).ready(function(){
         let initializegame = function(){
             if (!questionBoxShown){
                 $("#question-box").show();
+                $("#slide-show").show();
                 questionBoxShown = true;
             };
             $("#pause-box").empty()
@@ -159,6 +163,7 @@ $(document).ready(function(){
                 $("#question").html(currentObject.question);
 
                 for( i = 0; i < currentObject.possibleAnswers.length; i++){
+                    // $("#answer-area").append(newAnswerBTN);
                     currentAnswer = currentObject.possibleAnswers[i];
                     console.log(currentAnswer)
                     let newAnswerBTN = $("<h2>");
@@ -184,6 +189,7 @@ $(document).ready(function(){
             questionCount++;
             questionsUsed.push(currentObject);
             clearInterval(countInterval);
+            $("#slide-show").hide();
             $("#question-box").hide();
             $("#pause-box").append(`<p id="win-loss-text-result"></p>`); 
             $("#pause-box").append(`<img id="game-img" src="${currentObject.img}">`);
@@ -213,7 +219,7 @@ $(document).ready(function(){
 
         let finalScreen = function(){
             $("#question-box").hide();
-            $("#head-imgs").hide();
+            $("#head-imgs").empty();
             $("#pause-box").show();
             clearInterval(countInterval);
 
@@ -224,8 +230,8 @@ $(document).ready(function(){
             $("#losses").append("<p>losses</p>");
             $("#losses").append(`<p>${losses}</p>`);
             $("#pause-box").append(`<p id="win-loss-text-result"></p>`); 
-            $("#head").append(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`);             
-            $("#pause-box").append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+            $("#head-imgs").append(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`);             
+            $("#head-imgs").append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
 
 
             if(wins === questionList.length){

@@ -15,6 +15,61 @@
     answers 
     score 
     when answer given it shows for a feww seconds a screen weather you got it right or not. then switches to next question with out any user input.   -->
+    <footer id="foot-flex">
+        <p>hello</p>
+        <section id="audio-flex">
+            <audio autoplay id="music" >
+                    <source src="assets/sounds/Psychic TV - The Orchids [1983].mp3" type="audio/mpeg">
+            </audio>
+            <p>Hear what they have to say, or to get them to shut the hell up!</p>
+            <section id="audio-btn-flex">
+                <button id="play" onclick="playAudio()" type="button">Play</button>
+                <button id="pause" onclick="pauseAudio()" type="button">Pause</button> 
+                <button id="next" onclick="nextTrack()" type="button">Next track</button>
+            </section>
+            <script>
+
+  
+                    let musicElement = document.getElementById("music");
+                    let musicCount = 1;
+                    let musicList =["assets/sounds/Psychic TV - The Orchids [1983].mp3", "assets/sounds/Hamburger Lady (D.o.A. The Third and Final Report of Throbbing Gristle, 1978).mp3","assets/sounds/Throbbing Gristle - Almost A Kiss.mp3","assets/sounds/Psychic TV - Godstar.mp3"] 
+                    function playAudio() { 
+                        musicElement.play(); 
+                    };
+                    function pauseAudio() { 
+                        musicElement.pause(); 
+                    };
+                    musicElement.addEventListener("ended",function(){
+                        nextTrack();
+
+                    });
+                    let nextTrack = function(){
+                        console.log("next")
+                        musicElement.src = musicList[musicCount];
+                        playAudio()
+                        musicCount++;
+                        if(musicCount === musicList.length){
+                            musicCount =0;
+                        };
+                    };
+                    // musicElement.addEventListener("load", function(){
+                    //     console.log("load check")
+                    //     playAudio()
+                    // }, true);
+                    // // if(musicElement !== undefined){
+                    //     playAudio();
+                        
+                    // };
+                    
+
+                    
+            </script>
+        </section>
+        <section id="about-flex">
+            <p>This website was made by Zev Ubu Hoffman.</p> 
+            <p>It is a fanpage!</p>
+        </section>   
+    </footer>  
 </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/javascript/app.js"></script>

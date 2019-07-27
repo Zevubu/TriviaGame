@@ -1,25 +1,27 @@
 $(document).ready(function(){
         // decliar variables 
     // build page sections.
-    let count = 0;
+    let slideCount = 0;
+    let musicCount = 0;
+    let musicList =["assets/sounds/Psychic TV - The Orchids [1983].mp3", "assets/sounds/Hamburger Lady (D.o.A. The Third and Final Report of Throbbing Gristle, 1978).mp3","assets/sounds/Throbbing Gristle - Almost A Kiss.mp3","assets/sounds/Psychic TV - Godstar.mp3"]
     let geniImgs = ["assets/images/geni-greenhoody.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/geni-leaves.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/3Genesis.jpeg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Genis-baloon.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-throb-shirt.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/againstM-F.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/ladyJandGeniwedding.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/geni-lips.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/gen-greendress-grey-hair.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/Thee-Pandrogyne-pink.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-p-orridge-on-screen.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Thee-Pandrogyne.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/psychic_tv.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/young-punks.png","assets/images/psychickCrossWhiteBord.png","assets/images/gen-jaye.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/message_from_the_temple.png","assets/images/psychickCrossWhiteBord.png",];    let gameStart = false;
     let displayImage =function(){
-        $("#slide-show").html(`<img id="game-img" src="${geniImgs[count]}">`);
+        $("#slide-show").html(`<img id="game-img" src="${geniImgs[slideCount]}">`);
     }
     let slideShow = function(){
-        count++;
+        slideCount++;
         setTimeout(displayImage, 2000);
         $("#slide-show").html(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`)
-        if (count === geniImgs.length){
-            count = 0;
+        if (slideCount === geniImgs.length){
+            slideCount = 0;
         }
     };
     let startSlideshow = function(){
         setInterval(slideShow,2000);
     }
 
-    $("body").html(" <section id='game-area'></section> ");
-    $("#game-area").html("<header id='head'></header>");
+    $("body").prepend(" <section id='game-area'></section> ");
+    $("#game-area").prepend("<header id='head'></header>");
     $("#head").append(`<p id="geni-name-text"> Genesis P-Orridge </p>`);
     $("#head").append(`<section id="head-imgs"></section>`);
     $("#head-imgs").append(`<section id="slide-show"></section>`);
@@ -27,6 +29,13 @@ $(document).ready(function(){
     // $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
     $("#game-area").append("<article id='question-box'></article>");
     $("#question-box").html("<button id='start-btn'>Start Game</button>");
+    $("#game-area").append(`<footer id="foot"></footer>`);
+    
+
+   
+
+
+
 
     startSlideshow()
     
@@ -88,7 +97,7 @@ $(document).ready(function(){
             sound: "filler",
         };
         let question3 = {
-            question: "What artist that contributed to Phychick TV, shares a name with the ceator of this website?",
+            question: "What artist that contributed to Phychic TV, shares a name with the ceator of this website?",
             answer: "Z'EV",
             possibleAnswers: ["Larry Thrasher", "Timothy Leary", "Z'EV", "Pere UBU"],
             info: ["<p>a percussionist, performer, composer, instrument builder, visual artist, poet and theorist who explored visceral and mystical dimensions of sound — becoming a pioneer of industrial music along the way.</p>", "<p> in memoriam </p>"],
@@ -103,9 +112,17 @@ $(document).ready(function(){
             img: "assets/images/23Skull.jpg",
             sound: "filler",
         };
+        let question5 = {
+            question: "What Psychic TV song was an homage to rolling stones Brian Jones  ?",
+            answer: "Godstar",
+            possibleAnswers: ["Godstar", "The Orchirds", "Dreams Less Sweet", "Are You Experienced"],
+            info: ["<p> This is a story! A very special story.</p>", "<p> It's about Brian Jones, one of the Rolling Stones. </p>", "<p>Where were you when the stars went out?  </p>", "<p> Where were you when they started to shout? </p>", "<p> I saw you alone by the pool, </p>", "<p>and all your friends called you a fool.</p>"],
+            img: "assets/images/23Skull.jpg",
+            sound: "filler",
+        };
 
 
-        questionList = [question1,question2,question3,question4];
+        questionList = [question1,question2,question3,question4,question5];
         
         // // for(let i =0; i < questionList.length; i++ ){
         //     randomQnum = Math.floor(Math.random() * questionList.length);
@@ -197,7 +214,7 @@ $(document).ready(function(){
             }
             $("#pause-box").append(currentObject.info)
             
-            setTimeout(initializegame, 7235); 
+            setTimeout(initializegame, 7230); 
             
         };
 
@@ -205,14 +222,23 @@ $(document).ready(function(){
 
         let finalScreen = function(){
             $("#question-box").hide();
-            $("#pause-box").show()
+            $("#head-imgs").hide();
+            $("#pause-box").show();
             clearInterval(countInterval);
+
+            $("#pause-box").append(`<section id="final-wins"></section>`);
+            $("#final-wins").append("<p>wins</p>");
+            $("#final-wins").append(`<p>${wins}</p>`);
+            $("#pause-box").append(`<section id="losses"></section>`); 
+            $("#losses").append("<p>losses</p>");
+            $("#losses").append(`<p>${losses}</p>`);
             $("#pause-box").append(`<p id="win-loss-text-result"></p>`); 
-            $("#pause-box").append(`<img id="game-img" src="${currentObject.img}">`)
+            $("#head").append(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`);             
+            $("#pause-box").append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
 
 
             if(wins === questionList.length){
-                $("#win-loss-text-result").text(`You really know your stuff. You got all of them right!`)
+                $("#win-loss-text-result").text(`You really know your stuff. You got all of them right!`);
             }
             else if(wins > losses){
                 $("#win-loss-text-result").text(`You got more then half right, good job!`);
@@ -220,14 +246,14 @@ $(document).ready(function(){
                 //need to replace with a screen replace.
             }
             else if (wins === losses){
-                $("#win-loss-text-result").text(`You got half right!`)
-                console.log("You got half right!")
+                $("#win-loss-text-result").text(`You got half right!`);
+                console.log("You got half right!");
                 //need to replace with a screen replace.
             }
             else{
                 clearInterval(countInterval);
-                $("#win-loss-text-result").text(`You lost the game`)
-                console.log("You lost the game.")
+                $("#win-loss-text-result").text(`You lost the game`);
+                console.log("You lost the game.");
                 //need to replace with a screen replace.
             };
         };

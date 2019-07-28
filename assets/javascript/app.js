@@ -3,10 +3,9 @@ $(document).ready(function(){
         // decliar variables 
     // build page sections.
     let slideCount = 0;
-    let geniImgs = ["assets/images/geni-greenhoody.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/geni-leaves.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/3Genesis.jpeg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Genis-baloon.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-throb-shirt.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/againstM-F.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/ladyJandGeniwedding.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/geni-lips.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/gen-greendress-grey-hair.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/Thee-Pandrogyne-pink.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-p-orridge-on-screen.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Thee-Pandrogyne.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/psychic_tv.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/young-punks.png","assets/images/psychickCrossWhiteBord.png","assets/images/gen-jaye.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/message_from_the_temple.png","assets/images/psychickCrossWhiteBord.png",];    
+    let geniImgs = ["assets/images/geni-greenhoody.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/geni-leaves.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/greyimgwithteeth.webp", "assets/images/psychickCrossWhiteBord.png", "assets/images/3Genesis.jpeg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Genis-baloon.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-throb-shirt.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/againstM-F.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/ladyJandGeniwedding.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/geni-lips.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/gen-greendress-grey-hair.jpg", "assets/images/psychickCrossWhiteBord.png","assets/images/Thee-Pandrogyne-pink.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/genesis-p-orridge-on-screen.jpg", "assets/images/psychickCrossWhiteBord.png", "assets/images/Thee-Pandrogyne.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/psychic_tv.jpg","assets/images/psychickCrossWhiteBord.png", "assets/images/young-punks.png","assets/images/psychickCrossWhiteBord.png","assets/images/gen-jaye.jpg","assets/images/psychickCrossWhiteBord.png","assets/images/message_from_the_temple.png","assets/images/psychickCrossWhiteBord.png",];    
     let gameStart = false;
     let otherMusicElement = document.getElementById("music");
-    otherMusicElement.play();
     let displayImage =function(){
         $("#slide-show").html(`<img id="game-img" src="${geniImgs[slideCount]}">`);
     }
@@ -48,7 +47,7 @@ $(document).ready(function(){
     // build question screan area
     $("#start-btn").on("click",function(){
         $("#start-btn").hide();
-        otherMusicElement.play();
+        // otherMusicElement.play();
         gameStart = true;
         let questionBoxShown = true;
         let currentAnswer;
@@ -77,7 +76,8 @@ $(document).ready(function(){
         $("#win-loss").append("<section id='loss-area'></section>")
         $("#loss-area").append("<p id='loss-text'> Losses:</p>")
         $("#loss-area").append("<p id='loss'></p>")
-        $("#question-area").append("<p id='question'></p>"); 
+        $("#question-area").append("<section id='question-text-box'></section>"); 
+        $("#question-text-box").append("<p id='question'></p>"); 
         $("#question-box").append("<section id='answer-box'></section>");
         $("#answer-box").append("<section id='answer-area'></section");
         // questions Q:What genre of music did Throbing Gristle coin the name of? A: industrial. 
@@ -87,8 +87,16 @@ $(document).ready(function(){
         let question1 = {
             question: "What genre of music did Throbing Gristle coin the name of?",
             answer: "Industrial",
-            possibleAnswers: ["Darkwave", "Industrial", "Acid House", "Black Metal"],
-            info: ["<p>The opening of Prostitution marked the launch of Throbbing Gristle, the band formed when Cosey Fanni Tutti, P-Orridge and fellow COUM member Peter Christopherson met electronics wizard Chris Carter... the churning, terrifying noise they created... attracted an ever-increasing group of intense devotees, much to the band’s apparent horror. </p>","<p> Paraphrase from and interview with Cosey Fanni Tutti. by Alex Patrits </p>"],
+            possibleAnswers: ["Darkwave", "Black Metal", "Acid House", "Industrial"],
+            info: [
+                "<p>The opening of Prostitution marked the launch of Throbbing Gristle.</p>",
+                "<p>The band formed when fellow COUM members</p>",
+                "<p>Cosey Fanni Tutti, P-Orridge and Peter Christopherson met electronics wizard Chris Carter.</p>",
+                "<p>The churning, terrifying noise they created attracted an ever-increasing group of intense devotees.</p>",
+                "<br>",
+                "<p>Much to the band’s apparent horror. </p>",
+                "<br>",
+                "<p> Paraphrase from and interview with Cosey Fanni Tutti. by Alex Patrits </p>"],
             img: `assets/images/throbbing-gristle-jazz.jpg`,
             sound: "filler",
         };
@@ -96,7 +104,8 @@ $(document).ready(function(){
             question: "When P-Orridge and Lady Jaye began to get cosmetic surgery to become the same person what was their term for what they became?",
             answer: "The Pandrogyne",
             possibleAnswers: ["The Pandrogyne", "The Geninirian", "Aceiamorph", "Transatamo"],
-            info: ["<p>The two sought to merge themselves into one being, something P-Orridge has termed the \“pandrogyne.\”</p> "],
+            info: ["<p>The two sought to merge themselves into one being.</p>", 
+            " <p> some-thing Th-eye termed \“Thee Pandrogyne.\”</p> "],
             img: `assets/images/twins-entwined.jpg`,
             sound: "filler",
         };
@@ -104,22 +113,28 @@ $(document).ready(function(){
             question: "What artist that contributed to Phychic TV, shares a name with the ceator of this website?",
             answer: "Z'EV",
             possibleAnswers: ["Larry Thrasher", "Timothy Leary", "Z'EV", "Pere UBU"],
-            info: ["<p>a percussionist, performer, composer, instrument builder, visual artist, poet and theorist who explored visceral and mystical dimensions of sound — becoming a pioneer of industrial music along the way.</p>", "<p> in memoriam </p>"],
+            info:[
+                "<p>A percussionist, performer, composer, instrument builder, visual artist, poet and theorist.</p>", 
+                "<p> Who explored visceral and mystical dimensions of sound — becoming a pioneer of industrial music along the way.</p>", 
+                "<br>",
+                "<p> In Memoriam </p>"
+                ],
             img: `assets/images/ZevLive2.jpg`,
             sound: "filler",
         };
         let question4 = {
             question: "What number is significant in the philosophy of TOPY?",
             answer: "23",
-            possibleAnswers: ["42", "55", "23", "666"],
-            info: [" \"The number 23 is a bit ov a situationist prank as nothing freaks out the flat people as this mystic number.\""],
+            possibleAnswers: ["666", "13", "23", "42"],
+            info: [" \"The number 23 is a bit ov a situationist prank...</p>",
+            "<p> as nothing freaks out the flat people as this mystic number.\""],
             img: "assets/images/23Skull.jpg",
             sound: "filler",
         };
         let question5 = {
             question: "What Psychic TV song was an homage to rolling stones Brian Jones  ?",
             answer: "Godstar",
-            possibleAnswers: ["Godstar", "The Orchirds", "Dreams Less Sweet", "Are You Experienced"],
+            possibleAnswers: ["The Orchirds", "Godstar", "Dreams Less Sweet", "Are You Experienced"],
             info: ["<p> This is a story! A very special story.</p>", "<p> It's about Brian Jones, one of the Rolling Stones. </p>", "<p>Where were you when the stars went out?  </p>", "<p> Where were you when they started to shout? </p>", "<p> I saw you alone by the pool, </p>", "<p>and all your friends called you a fool.</p>"],
             img: "assets/images/23Skull.jpg",
             sound: "filler",
@@ -146,7 +161,7 @@ $(document).ready(function(){
             
             count = 23
             $("#timer-area").text(count);
-            countInterval = setInterval(countdown, 1000)
+            // countInterval = setInterval(countdown, 1000)
 
             currentObject = questionList [Math.floor(Math.random() * questionList.length)];
 
@@ -191,11 +206,16 @@ $(document).ready(function(){
             clearInterval(countInterval);
             $("#slide-show").hide();
             $("#question-box").hide();
-            $("#pause-box").append(`<p id="win-loss-text-result"></p>`); 
-            $("#pause-box").append(`<img id="game-img" src="${currentObject.img}">`);
+            $("#pause-box").append(`<section id="pause-img"></section>`);
+            $("#pause-box").append(`<section id="text-box"></section>`);
+            $("#text-box").append(`<section id="wl-box"></section>`);
+            $("#wl-box").append(`<p id="win-loss-text-result"></p>`); 
+            $("#text-box").append(`<section id="text-pause-box"></section>`);
             
-            soundtype = currentObject.sound.split(".").pop();
-            console.log(soundtype);
+            $("#pause-img").append(`<img id="game-img" src="${currentObject.img}">`);
+            
+            // soundtype = currentObject.sound.split(".").pop();
+            // console.log(soundtype);
             $("#pause-box").append(`<source src="${currentObject.sound}" type="audio/${soundtype}">`);
             if (countLost){
                 countLost = false
@@ -209,9 +229,9 @@ $(document).ready(function(){
                 $("#win-loss-text-result").text(`I'm sorry my dear but thee correct answer was ${currentObject.answer}`)
 
             }
-            $("#pause-box").append(currentObject.info)
+            $("#text-pause-box").append(currentObject.info)
             
-            setTimeout(initializegame, 7230); 
+            setTimeout(initializegame, 7); 
             
         };
 
@@ -222,34 +242,51 @@ $(document).ready(function(){
             $("#head-imgs").empty();
             $("#pause-box").show();
             clearInterval(countInterval);
+            
+            $("#pause-box").append("<section id='final-score-area'></section>");
+            // $("#score-area").append("<p id='Your-score-text'>Your score:</p>");
+            $("#final-score-area").append("<section id='final-win-loss'></section>");
+            $("#final-win-loss").append("<section id='final-wins-area'></section>");
+            $("#final-wins-area").append("<p id='final-wins-text'>Wins:</p>");
+            $("#final-wins-area").append(`<p id='final-wins'>${wins}</p>`);
+            $("#final-win-loss").append("<section id='final-loss-area'></section>");
+            $("#final-loss-area").append("<p id='final-loss-text'>Losses:</p>");
+            $("#final-loss-area").append(`<p id='final-loss'>${losses}</p>`);
+            $("#pause-box").append("<section id='final-text-box'></section>"); 
+            $("#final-text-box").append("<p id='win-loss-text-result'></p>"); 
 
-            $("#pause-box").append(`<section id="final-wins"></section>`);
-            $("#final-wins").append("<p>wins</p>");
-            $("#final-wins").append(`<p>${wins}</p>`);
-            $("#pause-box").append(`<section id="losses"></section>`); 
-            $("#losses").append("<p>losses</p>");
-            $("#losses").append(`<p>${losses}</p>`);
-            $("#pause-box").append(`<p id="win-loss-text-result"></p>`); 
+        
+            // $("#pause-box").append(`<section id="final-wins"></section>`);
+            // $("#final-wins").append("<p>wins</p>");
+            // $("#final-wins").append(`<p>${wins}</p>`);
+            // $("#pause-box").append(`<section id="final-losses"></section>`); 
+            // $("#final-losses").append("<p>losses</p>");
+            // $("#final-losses").append(`<p>${losses}</p>`);
+             
             $("#head-imgs").append(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`);             
             $("#head-imgs").append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
 
 
             if(wins === questionList.length){
-                $("#win-loss-text-result").text(`You really know your stuff. You got all of them right!`);
+                $("#win-loss-text-result").text(`This game has ended. Your Know-ledge was sufficient. You answered all questions correctly.`);
             }
             else if(wins > losses){
-                $("#win-loss-text-result").text(`You got more then half right, good job!`);
+                $("#win-loss-text-result").text(`This game has ended. Your Know-ledge was sufficient.`);
                 
                 //need to replace with a screen replace.
             }
             else if (wins === losses){
-                $("#win-loss-text-result").text(`You got half right!`);
+                $("#win-loss-text-result").text(`This game has ended. Your Know-ledge is perfectly balanced.`);
                 console.log("You got half right!");
                 //need to replace with a screen replace.
             }
+            else if(wins === 2 && losses ===3){
+                $("#win-loss-text-result").text(`23*23 23*23*23`);
+                console.log("23*23 23*23*23");
+
+            }
             else{
-                clearInterval(countInterval);
-                $("#win-loss-text-result").text(`You lost the game`);
+                $("#win-loss-text-result").text(`This game has ended. You didn't win, but don't worry this game is trivial.`);
                 console.log("You lost the game.");
                 //need to replace with a screen replace.
             };

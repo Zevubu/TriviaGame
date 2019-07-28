@@ -89,12 +89,10 @@ $(document).ready(function(){
             answer: "Industrial",
             possibleAnswers: ["Darkwave", "Black Metal", "Acid House", "Industrial"],
             info: [
-                "<p>The opening of Prostitution marked the launch of Throbbing Gristle.</p>",
-                "<p>The band formed when fellow COUM members</p>",
-                "<p>Cosey Fanni Tutti, P-Orridge and Peter Christopherson met electronics wizard Chris Carter.</p>",
+                "<p>The opening of COUM's Prostitution marked the launch of Throbbing Gristle.</p>",
                 "<p>The churning, terrifying noise they created attracted an ever-increasing group of intense devotees.</p>",
-                "<br>",
                 "<p>Much to the band’s apparent horror. </p>",
+                "<p>Cosey Fanni Tutti, P-Orridge, Peter Christopherson met Chris Carter.</p>",
                 "<br>",
                 "<p> Paraphrase from and interview with Cosey Fanni Tutti. by Alex Patrits </p>"],
             img: `assets/images/throbbing-gristle-jazz.jpg`,
@@ -105,7 +103,7 @@ $(document).ready(function(){
             answer: "The Pandrogyne",
             possibleAnswers: ["The Pandrogyne", "The Geninirian", "Aceiamorph", "Transatamo"],
             info: ["<p>The two sought to merge themselves into one being.</p>", 
-            " <p> some-thing Th-eye termed \“Thee Pandrogyne.\”</p> "],
+            " <p> some-thing HER/E termed \“Thee Pandrogyne.\”</p> "],
             img: `assets/images/twins-entwined.jpg`,
             sound: "filler",
         };
@@ -139,7 +137,7 @@ $(document).ready(function(){
             answer: "Godstar",
             possibleAnswers: ["The Orchirds", "Godstar", "Dreams Less Sweet", "Are You Experienced"],
             info: ["<p> This is a story! A very special story.</p>", "<p> It's about Brian Jones, one of the Rolling Stones. </p>", "<p>Where were you when the stars went out?  </p>", "<p> Where were you when they started to shout? </p>", "<p> I saw you alone by the pool, </p>", "<p>and all your friends called you a fool.</p>"],
-            img: "assets/images/23Skull.jpg",
+            img: "assets/images/psychic-tv-all-done-up-in-white.jpg",
             sound: "filler",
         };
 
@@ -234,7 +232,7 @@ $(document).ready(function(){
             }
             $("#text-pause-box").append(currentObject.info)
             
-            setTimeout(initializegame, 6); 
+            setTimeout(initializegame, 6235); 
             
         };
 
@@ -266,10 +264,10 @@ $(document).ready(function(){
             // $("#pause-box").append(`<section id="final-losses"></section>`); 
             // $("#final-losses").append("<p>losses</p>");
             // $("#final-losses").append(`<p>${losses}</p>`);
-            $("#head-imgs").append(`<iframe src="https://giphy.com/embed/m8rFmGo0DCTok" width="400" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mtv-wall-porridge-m8rFmGo0DCTok"></a></p>`); 
+            // $("#head-imgs").append(`<iframe src="https://giphy.com/embed/m8rFmGo0DCTok" width="400" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mtv-wall-porridge-m8rFmGo0DCTok"></a></p>`); 
             $("#head-imgs").append(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`);             
             $("#head-imgs").append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
-
+            
 
             if(wins === questionList.length){
                 $("#win-loss-text-result").text(`This game has ended. Your Know-ledge was sufficient. You answered all questions correctly.`);
@@ -286,11 +284,15 @@ $(document).ready(function(){
             }
             else if(wins === 2 && losses ===3){
                 $("#win-loss-text-result").text(`23*23 23*23*23`);
+                $("#final-text-box").append("<p id='win-loss-text-result'>Weather ov L-if-e or Magick. You have found You're selves HER/E. </p>"); 
+                $("#final-text-box").prepend("<p id='win-loss-text-result'>THEE best answer is not allways THEE right ONe.</p>"); 
+
                 console.log("23*23 23*23*23");
 
             }
             else{
-                $("#win-loss-text-result").text(`This game has ended. You didn't win, but don't worry this game is trivial.`);
+                $("#win-loss-text-result").text(` This game has ended. You didn't win, but don't worry the consequences are trivial.`);
+               
                 console.log("You lost the game.");
                 //need to replace with a screen replace.
             };

@@ -1,18 +1,47 @@
 # TriviaGame
 a trivia game that uses java script logic and jquery to make page elements.
 everything on on the page was made with jquer except for the music play which I hard coded into the html. I used a music play I made for a past project however I updated it with a skip track function.
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>The Genisis P Trivia Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/resets.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-</head>
-<body>
-    <footer id="foot-flex">
+
+How I made the opening page. I made something similar for timed changing page.
+
+    $("body").prepend(" <section id='game-flex'></section> ");
+    $("#game-flex").prepend(" <section id='game-area'></section> ");
+    $("#game-area").prepend("<header id='head'></header>");
+    $("#head").append(`<p id="geni-name-text"> Genesis P-Orridge </p>`);
+    $("#head").append(`<section id="head-imgs"></section>`);
+    $("#head-imgs").append(`<section id="slide-show"></section>`);
+    $("#slide-show").html(`<img id="game-img" src="assets/images/geni-greenhoody.jpg">`);
+    // $("#head-imgs").append(`<img id="phychickCross" src="assets/images/psychickCrossWhiteBord.png">`);
+    $("#game-area").append("<article id='question-box'></article>");
+    $("#head").append(`<section id="head-btn"></section>`);
+    $("#head-btn").append("<h2 id='start-btn'>Start Game</h2>");
+    $("#game-area").append(`<footer id="foot"></footer>`);
+    
+
+   
+
+How I made a slide show
+
+                let geniImgs = ["assets/images/geni-greenhoody.jpg","assets/images/psychickCrossWhiteBord.png"...];    
+            let gameStart = false;
+            let otherMusicElement = document.getElementById("music");
+            let displayImage =function(){
+                $("#slide-show").html(`<img id="game-img" src="${geniImgs[slideCount]}">`);
+            }
+            let slideShow = function(){
+                slideCount++;
+                setTimeout(displayImage, 2000);
+                $("#slide-show").html(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`)
+                if (slideCount === geniImgs.length){
+                    slideCount = 0;
+                }
+            }:
+            let startSlideshow = function(){
+                setInterval(slideShow,2000);
+
+How I made the music player design to skip the first track on the first go around as that track is the standing track and would play twice. I kept the hidden code in the bottom to show my process.
+
+            <footer id="foot-flex">
         <section id="audio-flex">
             <audio id="music" >
                     <source src="assets/sounds/Psychic TV - The Orchids [1983].mp3" type="audio/mpeg">
@@ -26,7 +55,7 @@ everything on on the page was made with jquer except for the music play which I 
             <script>
                     let musicElement = document.getElementById("music");
                     let musicCount = 1;
-                    let musicList =["assets/sounds/Psychic TV - The Orchids [1983].mp3", "assets/sounds/Hamburger Lady (D.o.A. The Third and Final Report of Throbbing Gristle, 1978).mp3","assets/sounds/Throbbing Gristle - Almost A Kiss.mp3","assets/sounds/Psychic TV - Godstar.mp3"] 
+                    let musicList =["assets/sounds/Psychic TV - The Orchids [1983].mp3"...] 
                     function playAudio() { 
                         musicElement.play(); 
                     };
@@ -44,17 +73,16 @@ everything on on the page was made with jquer except for the music play which I 
                         if(musicCount === musicList.length){
                             musicCount =0;
                         };
-                    };       
+                    };
+                    // musicElement.addEventListener("load", function(){
+                    //     console.log("load check")
+                    //     playAudio()
+                    // }, true);
+                    // // if(musicElement !== undefined){
+                    //     playAudio();  
+                    // };
             </script>
-        </section>
-        <section id="about-flex">
-            <p>A fan page by Zev Ubu Hoffman.</p> 
-        </section>   
-    </footer>  
-</body>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="assets/javascript/app.js"></script>
-</html>
+
 
 
 THEE GIF GRAVEYARD!

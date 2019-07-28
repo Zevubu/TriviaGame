@@ -220,14 +220,14 @@ $(document).ready(function(){
             $("#pause-box").append(`<source src="${currentObject.sound}" type="audio/${soundtype}">`);
             if (countLost){
                 countLost = false
-                $("#win-loss-text-result").text(`You ran out of time. Thee answer was ${currentObject.answer}`)
+                $("#win-loss-text-result").text(`You ran out of time. Thee answer was ${currentObject.answer}.`)
             }
             else if(answerTry === currentObject.answer){
-                $("#win-loss-text-result").text(`You where right! Thee answer is ${currentObject.answer}`)
+                $("#win-loss-text-result").text(`You where right! Thee answer is ${currentObject.answer}.`)
 
             }
             else{
-                $("#win-loss-text-result").text(`I'm sorry my dear but thee correct answer was ${currentObject.answer}`)
+                $("#win-loss-text-result").text(`I'm sorry my dear but thee correct answer was ${currentObject.answer}.`)
 
             }
             $("#text-pause-box").append(currentObject.info)
@@ -265,9 +265,9 @@ $(document).ready(function(){
             // $("#final-losses").append("<p>losses</p>");
             // $("#final-losses").append(`<p>${losses}</p>`);
             // $("#head-imgs").append(`<iframe src="https://giphy.com/embed/m8rFmGo0DCTok" width="400" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mtv-wall-porridge-m8rFmGo0DCTok"></a></p>`); 
-            $("#head-imgs").append(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`);             
-            $("#head-imgs").append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
-            
+            $("#head-imgs").append(`<img id="game-img" src="assets/images/psychickCross.png">`);             
+            $("#head-imgs").append(`<iframe id="final-video" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+            // width="560" height="315"
 
             if(wins === questionList.length){
                 $("#win-loss-text-result").text(`This game has ended. Your Know-ledge was sufficient. You answered all questions correctly.`);
@@ -285,7 +285,7 @@ $(document).ready(function(){
             else if(wins === 2 && losses ===3){
                 $("#win-loss-text-result").text(`23*23 23*23*23`);
                 $("#final-text-box").append("<p id='win-loss-text-result'>Weather ov L-if-e or Magick. You have found You're selves HER/E. </p>"); 
-                $("#final-text-box").prepend("<p id='win-loss-text-result'>THEE best answer is not allways THEE right ONe.</p>"); 
+                $("#final-text-box").prepend("<p id='win-loss-text-result'>THEE BE/est answer is not allways THEE rite one.</p>"); 
 
                 console.log("23*23 23*23*23");
 

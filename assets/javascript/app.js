@@ -47,7 +47,7 @@ $(document).ready(function(){
     // build question screan area
     $("#start-btn").on("click",function(){
         $("#start-btn").hide();
-        // otherMusicElement.play();
+        otherMusicElement.play();
         gameStart = true;
         let questionBoxShown = true;
         let currentAnswer;
@@ -127,7 +127,10 @@ $(document).ready(function(){
             answer: "23",
             possibleAnswers: ["666", "13", "23", "42"],
             info: [" \"The number 23 is a bit ov a situationist prank...</p>",
-            "<p> as nothing freaks out the flat people as this mystic number.\""],
+            "<p> as nothing freaks out the flat people as this mystic number.\"</p>",
+            "<br>",
+            "<p>THEE Psychick BIBLE</p>"
+            ],
             img: "assets/images/23Skull.jpg",
             sound: "filler",
         };
@@ -161,7 +164,7 @@ $(document).ready(function(){
             
             count = 23
             $("#timer-area").text(count);
-            // countInterval = setInterval(countdown, 1000)
+            countInterval = setInterval(countdown, 1000)
 
             currentObject = questionList [Math.floor(Math.random() * questionList.length)];
 
@@ -231,7 +234,7 @@ $(document).ready(function(){
             }
             $("#text-pause-box").append(currentObject.info)
             
-            setTimeout(initializegame, 7); 
+            setTimeout(initializegame, 6); 
             
         };
 
@@ -254,6 +257,7 @@ $(document).ready(function(){
             $("#final-loss-area").append(`<p id='final-loss'>${losses}</p>`);
             $("#pause-box").append("<section id='final-text-box'></section>"); 
             $("#final-text-box").append("<p id='win-loss-text-result'></p>"); 
+           
 
         
             // $("#pause-box").append(`<section id="final-wins"></section>`);
@@ -262,7 +266,7 @@ $(document).ready(function(){
             // $("#pause-box").append(`<section id="final-losses"></section>`); 
             // $("#final-losses").append("<p>losses</p>");
             // $("#final-losses").append(`<p>${losses}</p>`);
-             
+            $("#head-imgs").append(`<iframe src="https://giphy.com/embed/m8rFmGo0DCTok" width="400" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mtv-wall-porridge-m8rFmGo0DCTok"></a></p>`); 
             $("#head-imgs").append(`<img id="game-img" src="assets/images/psychickCrossWhiteBord.png">`);             
             $("#head-imgs").append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/foNV3xtH6n0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
 
